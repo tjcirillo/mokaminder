@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MokaMinder — Vote to Build It</title>
+<title>MokaMinder™ — Vote to Build It</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
@@ -39,6 +39,7 @@
     color: var(--copper-bright);
     display:flex;
     align-items:center;
+    justify-content:center;
     gap:10px;
     margin-bottom: 22px;
   }
@@ -47,6 +48,37 @@
     width:6px;height:6px;border-radius:50%;
     background: var(--copper-bright);
     box-shadow: 0 0 0 3px rgba(217,122,46,0.2);
+  }
+  .wordmark{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:3px;
+    margin-bottom: 10px;
+    text-align:center;
+  }
+  .wordmark-name{
+    font-family:'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(30px, 5.2vw, 46px);
+    letter-spacing: -0.01em;
+    color: var(--steam);
+  }
+  .wordmark-tm{
+    font-family:'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(13px, 1.8vw, 17px);
+    color: var(--steam);
+    opacity: 0.6;
+    position: relative;
+    top: -0.9em;
+  }
+  .subhead{
+    font-family:'Quicksand', sans-serif;
+    font-size: 14px;
+    color: rgba(59,36,23,0.55);
+    margin-bottom: 22px;
+    text-align:center;
   }
   h1{
     font-family:'Fraunces', serif;
@@ -271,10 +303,11 @@
 <body>
 <div class="wrap">
 
-  <div class="eyebrow">First-flow alert · patent-pending device</div>
+  <div class="wordmark"><span class="wordmark-name">MokaMinder</span><span class="wordmark-tm">™</span></div>
+  <div class="eyebrow">First-flow alert · <strong>patent-pending</strong></div>
   <h1>Never babysit your<br><em>moka pot</em> again.</h1>
   <p class="sub">
-    MokaMinder alerts you the instant coffee first flows into the upper chamber —
+    <strong>MokaMinder™</strong> alerts you the instant coffee first flows into the upper chamber —
     the exact moment you need to control the heat. Drop it in, walk away,
     and come back right on time.
   </p>
@@ -318,13 +351,13 @@
           <line x1="110" y1="19" x2="110" y2="27" stroke="#9a9a9a" stroke-width="0.8"/>
           <circle id="beepDot" cx="110" cy="9" r="3.5" fill="var(--copper-bright)"/>
         </g>
-        <text x="15" y="245" font-family="'IBM Plex Mono', monospace" font-size="7" letter-spacing="0.06em" fill="#8f8f8f" opacity="0.85">PATENT PENDING</text>
+        <text x="15" y="245" font-family="'IBM Plex Mono', monospace" font-weight="700" font-size="7" letter-spacing="0.06em" fill="#8f8f8f" opacity="0.85">PATENT PENDING</text>
       </svg>
-      <img id="deviceGif" alt="MokaMinder detecting first flow" style="width:150px;height:178px;display:none;">
+      <img id="deviceGif" alt="MokaMinder™ detecting first flow" style="width:150px;height:178px;display:none;">
       <div class="device-readout">
         <div class="device-label">Live device state</div>
         <div class="device-state" id="deviceState">watching for first flow…</div>
-        <div class="device-label" style="margin-top:10px;">Patent pending — U.S. App. No. 63/114,481</div>
+        <div class="device-label" style="margin-top:10px;"><strong>Patent pending</strong> — U.S. App. No. 63/114,481</div>
       </div>
     </div>
 
@@ -347,14 +380,14 @@
       <div id="thankYou" class="thank-you" hidden>
         <div class="thank-you-check">✓</div>
         <div class="thank-you-title">Thanks for your vote!</div>
-        <div class="thank-you-sub" id="thankYouSub">We'll let you know when MokaMinder is ready.</div>
+        <div class="thank-you-sub" id="thankYouSub">We'll let you know when MokaMinder™ is ready.</div>
       </div>
 
       <div class="fineprint">
         This is a demand test, not a purchase or a pledge — no money changes hands here.
         If enough people vote yes, we'll look for a contract manufacturer and an operating
         partner to help build and run this. Your email is only used to tell you if/when
-        MokaMinder becomes real.
+        MokaMinder™ becomes real.
       </div>
     </div>
   </div>
@@ -452,8 +485,8 @@ async function castVote(email){
   submitBtn.textContent = "Voted";
   voteFormArea.hidden = true;
   thankYouSub.textContent = email
-    ? "We'll email you the moment MokaMinder is ready to order."
-    : "We'll let you know when MokaMinder is ready.";
+    ? "We'll email you the moment MokaMinder™ is ready to order."
+    : "We'll let you know when MokaMinder™ is ready.";
   thankYou.hidden = false;
   deviceState.textContent = "first flow detected — alerting now";
   // Swap the idle illustration for the real animated GIF, permanently, looping from here on.
