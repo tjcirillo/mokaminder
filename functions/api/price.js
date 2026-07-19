@@ -1,4 +1,4 @@
-js// POST /api/price
+// POST /api/price
 // Body: { willPay: boolean }
 export async function onRequestPost(context) {
   let body;
