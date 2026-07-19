@@ -1,4 +1,4 @@
-js// GET /api/data
+// GET /api/data
 // Returns the public vote/price counts only. Never returns the email list —
 // that would leak every submitted address to anyone who calls this endpoint.
 export async function onRequestGet(context) {
