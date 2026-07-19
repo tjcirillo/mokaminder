@@ -1,4 +1,4 @@
-js// POST /api/vote
+// POST /api/vote
 // Body: { email: string | null }
 // Increments the vote count server-side (client can't set an arbitrary number)
 // and separately stores the email, deduplicated, without ever exposing that
