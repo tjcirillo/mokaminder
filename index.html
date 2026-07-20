@@ -415,9 +415,31 @@ function stopBeeping(){
   }
 }
 
+let sharedAudioCtx = null;
+
+// Must be called synchronously from inside a real tap/click handler — iOS Safari
+// only allows an AudioContext to unlock/resume when it's created (or resumed)
+// directly within a user gesture, not from a later timer callback.
+function unlockAudio(){
+  try{
+    if(!sharedAudioCtx){
+      sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if(sharedAudioCtx.state === 'suspended'){
+      sharedAudioCtx.resume();
+    }
+  }catch(e){}
+}
+
 function playBeep(){
   try{
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if(!sharedAudioCtx) return;
+    // Defensive: iOS can suspend the context again (e.g. tab backgrounded),
+    // so nudge it back to running on every beep, not just the first one.
+    if(sharedAudioCtx.state === 'suspended'){
+      sharedAudioCtx.resume();
+    }
+    const ctx = sharedAudioCtx;
     const times = [0, 0.22, 0.44];
     times.forEach(t=>{
       const osc = ctx.createOscillator();
@@ -508,12 +530,14 @@ async function castVote(email){
 document.getElementById('voteForm').addEventListener('submit', (e)=>{
   e.preventDefault();
   if(hasVoted) return;
+  unlockAudio();
   const email = document.getElementById('email').value.trim();
   castVote(email || null);
 });
 
 document.getElementById('skipBtn').addEventListener('click', ()=>{
   if(hasVoted) return;
+  unlockAudio();
   castVote(null);
 });
 
