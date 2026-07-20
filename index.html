@@ -415,6 +415,18 @@ function stopBeeping(){
   }
 }
 
+// How long the "alerting" state runs before settling — represents someone
+// noticing the beep and pulling the pot off the heat.
+const ALERT_DURATION_MS = 4500;
+
+function settleAlert(){
+  stopBeeping();
+  deviceBox.classList.remove('beeping');
+  deviceState.textContent = "alert sent — pot handled";
+  deviceGif.style.display = 'none';
+  deviceSvg.style.display = 'block';
+}
+
 let sharedAudioCtx = null;
 
 // Must be called synchronously from inside a real tap/click handler — iOS Safari
@@ -505,6 +517,9 @@ async function castVote(email){
   // Loops on its own interval rather than firing once, so the audio keeps pace
   // with the looping GIF instead of going silent after ~0.6s.
   setTimeout(startBeeping, 60);
+  // The alert represents someone noticing and pulling the pot — it should settle
+  // on its own after a few seconds rather than beep/animate indefinitely.
+  setTimeout(settleAlert, ALERT_DURATION_MS);
 
   // Persist in the background; a failed request must not break the UI above,
   // which has already shown the vote as counted.
