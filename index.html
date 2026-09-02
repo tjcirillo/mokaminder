@@ -94,6 +94,16 @@
     transition: border-color 0.15s, opacity 0.15s;
   }
   .demo-link:hover{ border-color: var(--copper-bright); }
+  .demo-link-disabled{
+    cursor: default;
+    border-bottom-color: rgba(59,36,23,0.2);
+  }
+  .demo-link-disabled::before{ border-left-color: var(--copper-bright); }
+  .demo-link-disabled:hover{ border-bottom-color: rgba(59,36,23,0.2); }
+  .demo-link-disabled-text{
+    color: rgba(59,36,23,0.4);
+    font-style: italic;
+  }
   .demo-link::before{
     content:"";
     width:0; height:0;
@@ -436,7 +446,7 @@
   <div class="demo-links">
     <span class="demo-note">Demo available on request</span>
     <span class="demo-links-divider">·</span>
-    <a class="demo-link" href="https://youtu.be/gDFuvPzWIks" target="_blank" rel="noopener">Watch Nonna try it</a>
+    <span class="demo-link demo-link-disabled" aria-disabled="true">Watch Nonna try it <span class="demo-link-disabled-text">— temporarily unavailable</span></span>
     <span class="demo-links-divider">·</span>
     <button type="button" class="demo-link" id="photoTrigger">See MokaMinder here</button>
   </div>
