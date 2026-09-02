@@ -94,16 +94,6 @@
     transition: border-color 0.15s, opacity 0.15s;
   }
   .demo-link:hover{ border-color: var(--copper-bright); }
-  .demo-link-disabled{
-    cursor: default;
-    border-bottom-color: rgba(59,36,23,0.2);
-  }
-  .demo-link-disabled::before{ border-left-color: var(--copper-bright); }
-  .demo-link-disabled:hover{ border-bottom-color: rgba(59,36,23,0.2); }
-  .demo-link-disabled-text{
-    color: rgba(59,36,23,0.4);
-    font-style: italic;
-  }
   .demo-link::before{
     content:"";
     width:0; height:0;
@@ -446,14 +436,14 @@
   <div class="demo-links">
     <span class="demo-note">Demo available on request</span>
     <span class="demo-links-divider">·</span>
-    <span class="demo-link demo-link-disabled" aria-disabled="true">Watch Nonna try it <span class="demo-link-disabled-text">— temporarily unavailable</span></span>
+    <button type="button" class="demo-link" id="nonnaTrigger">Watch Nonna try it</button>
     <span class="demo-links-divider">·</span>
     <button type="button" class="demo-link" id="photoTrigger">See MokaMinder here</button>
   </div>
 
   <div class="photo-lightbox" id="photoLightbox">
     <button type="button" class="photo-lightbox-close" id="photoLightboxClose" aria-label="Close">&times;</button>
-    <img src="mokaminder-device.jpg" alt="MokaMinder device" class="photo-lightbox-img">
+    <img src="mokaminder-device.jpg" alt="MokaMinder device" class="photo-lightbox-img" id="photoLightboxImg">
   </div>
 
   <div class="card split">
@@ -561,13 +551,29 @@ trackPageView();
 
 // ---- Photo lightbox ----
 const photoTrigger = document.getElementById('photoTrigger');
+const nonnaTrigger = document.getElementById('nonnaTrigger');
 const photoLightbox = document.getElementById('photoLightbox');
+const photoLightboxImg = document.getElementById('photoLightboxImg');
 const photoLightboxClose = document.getElementById('photoLightboxClose');
 
-function openLightbox(){ photoLightbox.classList.add('open'); }
+const DEVICE_PHOTO_SRC = 'mokaminder-device.jpg';
+const DEVICE_PHOTO_ALT = 'MokaMinder device';
+const NONNA_PHOTO_SRC = 'Storyboard_for_short_film_202609021546.jpeg';
+const NONNA_PHOTO_ALT = 'Storyboard for MokaMinder short film featuring Nonna';
+
+function openLightbox(src, alt){
+  photoLightboxImg.src = src;
+  photoLightboxImg.alt = alt;
+  photoLightbox.classList.add('open');
+}
 function closeLightbox(){ photoLightbox.classList.remove('open'); }
 
-photoTrigger.addEventListener('click', openLightbox);
+photoTrigger.addEventListener('click', function(){
+  openLightbox(DEVICE_PHOTO_SRC, DEVICE_PHOTO_ALT);
+});
+nonnaTrigger.addEventListener('click', function(){
+  openLightbox(NONNA_PHOTO_SRC, NONNA_PHOTO_ALT);
+});
 photoLightboxClose.addEventListener('click', closeLightbox);
 photoLightbox.addEventListener('click', function(e){
   if(e.target === photoLightbox) closeLightbox();
