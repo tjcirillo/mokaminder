@@ -159,32 +159,6 @@
   }
   .photo-lightbox-close:hover{ background: rgba(255,255,255,0.22); }
 
-  .video-lightbox{
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: rgba(30,18,11,0.82);
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-  }
-  .video-lightbox.open{ display: flex; }
-  .video-lightbox-frame{
-    width: 90vw;
-    max-width: 960px;
-    aspect-ratio: 16 / 9;
-  }
-  .video-lightbox-frame iframe{
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-  @media (max-width: 480px){
-    .video-lightbox-frame{ width: 92vw; }
-  }
-
   /* signature device */
   .card.split{ display:flex; gap:32px; align-items:flex-start; }
   .device-col{
@@ -460,7 +434,7 @@
   </p>
 
   <div class="demo-links">
-    <button type="button" class="demo-link" id="nonnaTrigger">Watch Nonna try it</button>
+    <a href="https://youtu.be/5aHf0pEcX0U" target="_blank" rel="noopener" class="demo-link" id="nonnaTrigger">Watch Nonna try it</a>
     <span class="demo-links-divider">·</span>
     <button type="button" class="demo-link" id="photoTrigger">See MokaMinder here</button>
   </div>
@@ -468,14 +442,6 @@
   <div class="photo-lightbox" id="photoLightbox">
     <button type="button" class="photo-lightbox-close" id="photoLightboxClose" aria-label="Close">&times;</button>
     <img src="mokaminder-device.jpg" alt="MokaMinder device" class="photo-lightbox-img" id="photoLightboxImg">
-  </div>
-
-  <div class="video-lightbox" id="videoLightbox">
-    <button type="button" class="photo-lightbox-close" id="videoLightboxClose" aria-label="Close">&times;</button>
-    <div class="video-lightbox-frame">
-      <iframe id="videoLightboxIframe" src="" title="Nonna tries MokaMinder" frameborder="0"
-        allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-    </div>
   </div>
 
   <div class="card split">
@@ -605,31 +571,9 @@ photoLightbox.addEventListener('click', function(e){
   if(e.target === photoLightbox) closeLightbox();
 });
 
-// ---- Video lightbox (embedded, so no tab switch / load flash) ----
-const videoTrigger = document.getElementById('nonnaTrigger');
-const videoLightbox = document.getElementById('videoLightbox');
-const videoLightboxIframe = document.getElementById('videoLightboxIframe');
-const videoLightboxClose = document.getElementById('videoLightboxClose');
-const YT_EMBED_SRC = 'https://www.youtube.com/embed/5aHf0pEcX0U?autoplay=1&rel=0';
-
-function openVideoLightbox(){
-  videoLightboxIframe.src = YT_EMBED_SRC;
-  videoLightbox.classList.add('open');
-}
-function closeVideoLightbox(){
-  videoLightbox.classList.remove('open');
-  videoLightboxIframe.src = ''; // stops playback when closed
-}
-videoTrigger.addEventListener('click', openVideoLightbox);
-videoLightboxClose.addEventListener('click', closeVideoLightbox);
-videoLightbox.addEventListener('click', function(e){
-  if(e.target === videoLightbox) closeVideoLightbox();
-});
-
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
     closeLightbox();
-    closeVideoLightbox();
   }
 });
 
