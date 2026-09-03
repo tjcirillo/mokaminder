@@ -434,9 +434,7 @@
   </p>
 
   <div class="demo-links">
-    <span class="demo-note">Demo available on request</span>
-    <span class="demo-links-divider">·</span>
-    <button type="button" class="demo-link" id="nonnaTrigger">Watch Nonna try it</button>
+    <a href="https://youtu.be/5aHf0pEcX0U" target="_blank" rel="noopener" class="demo-link" id="nonnaTrigger">Watch Nonna try it</a>
     <span class="demo-links-divider">·</span>
     <button type="button" class="demo-link" id="photoTrigger">See MokaMinder here</button>
   </div>
@@ -551,15 +549,12 @@ trackPageView();
 
 // ---- Photo lightbox ----
 const photoTrigger = document.getElementById('photoTrigger');
-const nonnaTrigger = document.getElementById('nonnaTrigger');
 const photoLightbox = document.getElementById('photoLightbox');
 const photoLightboxImg = document.getElementById('photoLightboxImg');
 const photoLightboxClose = document.getElementById('photoLightboxClose');
 
 const DEVICE_PHOTO_SRC = 'mokaminder-device.jpg';
 const DEVICE_PHOTO_ALT = 'MokaMinder device';
-const NONNA_PHOTO_SRC = 'Storyboard_for_short_film_1920x1080 (1).jpeg';
-const NONNA_PHOTO_ALT = 'Storyboard for MokaMinder short film featuring Nonna';
 
 function openLightbox(src, alt){
   photoLightboxImg.src = src;
@@ -570,9 +565,6 @@ function closeLightbox(){ photoLightbox.classList.remove('open'); }
 
 photoTrigger.addEventListener('click', function(){
   openLightbox(DEVICE_PHOTO_SRC, DEVICE_PHOTO_ALT);
-});
-nonnaTrigger.addEventListener('click', function(){
-  openLightbox(NONNA_PHOTO_SRC, NONNA_PHOTO_ALT);
 });
 photoLightboxClose.addEventListener('click', closeLightbox);
 photoLightbox.addEventListener('click', function(e){
